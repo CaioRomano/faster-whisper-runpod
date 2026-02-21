@@ -1,5 +1,6 @@
 import runpod
-import numpy as np
+import io
+import base64
 from faster_whisper import WhisperModel
 import os
 
@@ -58,7 +59,8 @@ def handler(event):
 
     speaker_name = input.get('speaker_name')
     speaker_id = input.get('speaker_id')
-    np_f32_audio_data = np.asarray(input.get('np_f32_audio_data'))
+    audio_base64 = base64.b64decode(input.get('audio_base64'))
+    buffer_audio = io.BytesIO(audio_binario)
     timestamp = input.get('timestamp')
 
     cache_root = "/runpod-volume/huggingface-cache/hub"
@@ -70,7 +72,7 @@ def handler(event):
     else:
         print(f"Cache root does NOT exist: {cache_root}")
 
-    segments, _ = model.transcribe(np_f32_audio_data, language=language, multilingual=True, beam_size=beam_size)
+    segments, _ = model.transcribe(buffer_audio, language=language, multilingual=True, beam_size=beam_size)
     segments = list(segments)
 
     text_transcribed = ' '.join([segment.text for segment in segments])
@@ -85,7 +87,7 @@ def handler(event):
     return response
 
 
-required_vars = ["MODEL_NAME", "SERVICE_URL"]
+required_vars = ["MODEL_NAME", "MODEL_DEVICE", "COMPUTE_TYPE", "LANGUAGE", "BEAM_SIZE"]
 missing_vars = [var for var in required_vars if not os.environ.get(var)]
 
 if missing_vars:
