@@ -60,7 +60,7 @@ def handler(event):
     speaker_name = input.get('speaker_name')
     speaker_id = input.get('speaker_id')
     audio_base64 = base64.b64decode(input.get('audio_base64'))
-    buffer_audio = io.BytesIO(audio_binario)
+    buffer_audio = io.BytesIO(audio_base64)
     timestamp = input.get('timestamp')
 
     cache_root = "/runpod-volume/huggingface-cache/hub"
