@@ -1,0 +1,8 @@
+{
+    "input": {
+        "speaker_name": "John Doe",
+        "speaker_id": 15,
+        "np_f32_audio_data": "np.ndarray_float32.to_list()",
+        "timestamp": "timestamp"
+    }
+}
