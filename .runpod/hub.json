@@ -13,6 +13,58 @@
       "12.8", "12.7", "12.6", "12.5", "12.4",
       "12.3", "12.2"
     ],
+    "presets": [
+      {
+        "name": "Performance Optimized (without GPU)",
+        "defaults": {
+          "MODEL_NAME": "tiny",
+          "LANGUAGE": "pt",
+          "MODEL_DEVICE": "cpu",
+          "COMPUTE_TYPE": "int8",
+          "BEAM_SIZE": 5
+        }
+      },
+      {
+        "name": "Performance Optimized (with GPU)",
+        "defaults": {
+          "MODEL_NAME": "tiny",
+          "LANGUAGE": "pt",
+          "MODEL_DEVICE": "gpu",
+          "COMPUTE_TYPE": "int8",
+          "BEAM_SIZE": 5
+        }
+      },
+      {
+        "name": "Medium Quality (without GPU)",
+        "defaults": {
+          "MODEL_NAME": "base",
+          "LANGUAGE": "pt",
+          "MODEL_DEVICE": "cpu",
+          "COMPUTE_TYPE": "int8",
+          "BEAM_SIZE": 5
+        }
+      },
+      {
+        "name": "Medium Quality (with GPU)",
+        "defaults": {
+          "MODEL_NAME": "base",
+          "LANGUAGE": "pt",
+          "MODEL_DEVICE": "gpu",
+          "COMPUTE_TYPE": "float16",
+          "BEAM_SIZE": 5
+        }
+      },
+      {
+        "name": "Max Quality",
+        "defaults": {
+          "MODEL_NAME": "turbo",
+          "LANGUAGE": "pt",
+          "MODEL_DEVICE": "gpu",
+          "COMPUTE_TYPE": "int8_float16",
+          "BEAM_SIZE": 5
+        }
+      }
+    ],
     "env": [
       {
         "key": "LANGUAGE",
