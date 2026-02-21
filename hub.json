@@ -1,1 +1,84 @@
+{
+  "title": "Faster Whisper Runpod",
+  "description": "It processes audio in NumPy array format (float 32) for maximum performance, and allows you to choose between different faster-whisper models and parameters such as beam_size, language, compute type, and model device. It keeps the model cached to reduce cold-start times.",
+  "type": "serverless",
+  "category": "audio",
+  "iconUrl": "https://your-icon-url.com/icon.png",
 
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 20,
+    "gpuCount": 1,
+    "allowedCudaVersions": [
+      "12.8", "12.7", "12.6", "12.5", "12.4",
+      "12.3", "12.2"
+    ],
+    "env": [
+      {
+        "key": "LANGUAGE",
+        "value": "pt",
+        "input": {
+          "default": "pt"
+        }
+      },
+      {
+        "key": "MODEL_DEVICE",
+        "input": {
+          "name": "model_device",
+          "type": "string",
+          "description": "Choose 'gpu' or 'cpu'",
+          "options": [
+            {"label": "Option 1", "value": "gpu"},
+            {"label": "Option 2", "value": "cpu"}
+          ],
+          "default": "gpu"
+        }
+      },
+      {
+        "key": "COMPUTE_TYPE",
+        "input": {
+          "name": "compute_type",
+          "type": "string",
+          "description": "Choose the compute_type",
+          "options": [
+            {"label": "Option 1", "value": "int8"},
+            {"label": "Option 2", "value": "int8_float16"},
+            {"label": "Option 3", "value": "float16"},
+            {"label": "Option 4", "value": "float32"}
+          ],
+          "default": "int8_float16"
+        }
+      },
+      {
+        "key": "MODEL_NAME",
+        "input": {
+          "name": "model_name",
+          "type": "string",
+          "description": "Choose the model name parameter",
+          "options": [
+            {"label": "Option 1", "value": "tiny"},
+            {"label": "Option 2", "value": "small"},
+            {"label": "Option 3", "value": "base"},
+            {"label": "Option 4", "value": "medium"},
+            {"label": "Option 5", "value": "large-v1"},
+            {"label": "Option 6", "value": "large-v2"},
+            {"label": "Option 7", "value": "large-v3"},
+            {"label": "Option 8", "value": "turbo"}
+          ],
+          "default": "turbo"
+        }
+      },
+      {
+        "key": "BEAM_SIZE",
+        "input": {
+          "name": "beam_size",
+          "type": "number",
+          "description": "Choose the beam_size parameter",
+          "min": 1,
+          "max": 8,
+          "default": 5
+        }
+      }
+    ]
+  }
+}
