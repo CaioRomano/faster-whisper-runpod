@@ -94,7 +94,7 @@ if missing_vars:
     raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
 
-HF_CACHE_DIR = "/runpod-volume/huggingface-cache/hub"
+MODEL_CACHE_DIR = "/runpod-volume/huggingface-cache/hub"
 os.environ["HF_HUB_OFFLINE"] = "1"
 os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
@@ -117,16 +117,20 @@ if MODEL_NAME not in AVAILABLE_MODELS:
 DEVICE = os.getenv('MODEL_DEVICE', 'gpu')
 COMPUTE_TYPE = os.getenv('COMPUTE_TYPE', 'int8_float16')
 
-MODEL_ID = f'Systran/faster-whisper-{MODEL_NAME}'
-LOCAL_MODEL_PATH = resolve_snapshot_path(MODEL_ID)
+
+    
+MODEL_ID = f'Systran/faster-whisper-{MODEL_NAME}' if MODEL_NAME != 'turbo' else f'Systran/faster-whisper-{MODEL_NAME}'
+# LOCAL_MODEL_PATH = resolve_snapshot_path(MODEL_ID)
 print(f"[ModelStore] Resolved local model path: {LOCAL_MODEL_PATH}")
 
 
 model = WhisperModel(
-    LOCAL_MODEL_PATH,
+    'turbo',
     device=DEVICE,
     compute_type=COMPUTE_TYPE,
-    local_files_only=True
+    local_files_only=True,
+    cpu_threads=os.cpu_count()
+    download_root='/runpod-volume/huggingface-cache/hub
 )
 
 
