@@ -22,7 +22,7 @@
       },
       {
         "key": "MODEL_DEVICE",
-        "value": "gpu"
+        "value": "cuda"
       },
       {
         "key": "COMPUTE_TYPE",
@@ -30,7 +30,7 @@
       },
       {
         "key": "MODEL_NAME",
-        "value": "base"
+        "value": "turbo"
       },
       {
         "key": "BEAM_SIZE",
