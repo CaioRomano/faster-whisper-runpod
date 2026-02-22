@@ -13,7 +13,6 @@ RUN rm -f /etc/apt/sources.list.d/*.list && \
     apt-get update && apt-get install -y --no-install-recommends \
     python3.11 \
     python-is-python3 \
-    ffmpeg \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -25,7 +24,9 @@ COPY requirements.txt .
 RUN uv pip install -r requirements.txt
 
 # Copia o restante dos arquivos (handler.py, etc)
-COPY . .
+COPY handler.py .
+
+COPY test_input.json .
 
 # Comando de inicialização direta para o menor cold start possível
 CMD ["python", "-u", "handler.py"]
