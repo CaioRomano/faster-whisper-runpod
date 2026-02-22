@@ -26,12 +26,12 @@
         "input": {
           "name": "model_device",
           "type": "string",
-          "description": "Choose 'gpu' or 'cpu'",
+          "description": "Choose 'cuda' or 'cpu'",
           "options": [
-            {"label": "With GPU", "value": "gpu"},
+            {"label": "With GPU", "value": "cuda"},
             {"label": "With CPU", "value": "cpu"}
           ],
-          "default": "gpu"
+          "default": "cuda"
         }
       },
       {
