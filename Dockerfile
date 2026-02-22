@@ -4,14 +4,10 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install uv
 
-RUN apt-get update && apt-get install -y build-essential \
-    && pip install --no-cache-dir -r requirements.txt \
-    && apt-get remove -y build-essential \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN uv pip install --no-cache -r requirements.txt
 
 COPY handler.py .
 
-CMD ["python", "-u", "handler.py"]
+CMD ["uv", "run", "handler.py"]
