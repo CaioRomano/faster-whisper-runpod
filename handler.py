@@ -109,7 +109,7 @@ AVAILABLE_MODELS = {
     "turbo",
 }
 
-MODEL_NAME = os.getenv('MODEL_NAME', 'base')
+MODEL_NAME = os.getenv('MODEL_NAME', 'turbo')
 
 if MODEL_NAME not in AVAILABLE_MODELS:
     raise ValueError(f"Invalid model name: {MODEL_NAME}")
